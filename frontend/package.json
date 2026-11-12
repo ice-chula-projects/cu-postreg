@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@cu-postreg/shared": "*",
+    "@tailwindcss/vite": "^4.3.5",
+    "tailwindcss": "^4.3.5",
     "vue": "^3.5.42",
     "vue-router": "^5.3.1"
   },
