@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "CHULALONGKORN";
+  src: url(../fonts/chulalongkorn/CHULALONGKORNReg.otf);
+}
+
+@font-face {
+  font-family: "CHULALONGKORN";
+  src: url(../fonts/chulalongkorn/CHULALONGKORNBold.otf);
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Anuphan";
+  src: url(../fonts/anuphan/Anuphan-VariableFont_wght.ttf);
+}
