@@ -1,0 +1,44 @@
+@import "tailwindcss";
+@import "fonts.css";
+
+@layer base {
+  p {
+    color: var(--color-text);
+  }
+
+  *:disabled {
+    color: var(--color-text-disabled)
+  }
+}
+
+@theme {
+  --font-chulalongkorn: "CHULALONGKORN", sans-serif;
+  --font-sans: "Anuphan", system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  
+  --color-primary: #da5f8e;
+  --color-primary-dark: #b94372;
+  --color-primary-light: #ffe5ef;
+  --color-primary-subtle: #fff2f7;
+
+  --color-secondary: #141414;
+  --color-secondary-light: #525252;
+
+  --color-surface: #f5f5f5;
+  --color-surface-alt: #f6f6f6;
+  --color-white: #ffffff;
+
+  --color-text: #141414;
+  --color-text-muted: #525252;
+  --color-text-disabled: #a3a3a3;
+
+  --color-separator: #bfbfbf;
+  --color-separator-alt: #e5e5e5;
+
+  --color-blessing: #f9a800;
+  --color-blessing-light: #fff4d6;
+
+  --color-success: #16a34a;
+  --color-danger: #dc2626;
+  --color-warning: #d97706;
+  --color-info: #2563eb;
+}
