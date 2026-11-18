@@ -43,6 +43,7 @@ const variantClasses = computed(() => variants[props.variant])
 <template>
   <button
     :class="[
+      'cursor-pointer',
       'rounded-md px-3 py-2',
       'transition-all duration-200 ease-out',
       'hover:-translate-y-0.5 hover:shadow-lg',

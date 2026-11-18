@@ -2,6 +2,7 @@
 import { useI18n } from 'vue-i18n';
 import Button from './Button.vue';
 import LanguageToggle from './LanguageToggle.vue';
+import LogoContainer from './LogoContainer.vue';
 
 const props = withDefaults(defineProps<{
   authenticated?: boolean
@@ -24,13 +25,13 @@ const { t } = useI18n({
 
 <template>
   <header class="
-    sticky w-full p-4
+    sticky w-full p-4 z-30
     flex items-center justify-between
-    bg-primary-light border-b border-b-primary
-    shadow-lg shadow-primary-subtle/50
+    bg-primary-light 
+    shadow-lg shadow-primary/10
   ">
     <section>
-      <h1 class="font-chulalongkorn font-bold text-3xl text-primary">CU POST-Reg</h1>
+      <LogoContainer />
     </section>
     <section class="flex gap-3">
       <Button class="font-medium" v-if="props.authenticated">{{ t('logout') }}</Button>
