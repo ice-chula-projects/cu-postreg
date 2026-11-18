@@ -9,6 +9,11 @@ const router = createRouter({
       component: () => import('@/views/Home.vue'),
     },
     {
+      path: '/login',
+      name: 'Login',
+      component: () => import('@/views/Login.vue'),
+    },
+    {
       path: '/register',
       name: 'Register for courses',
       component: () => import('@/views/RegistrationView.vue'),
@@ -17,7 +22,7 @@ const router = createRouter({
       path: '/drop',
       name: 'Drop courses',
       component: () => import('@/views/DropView.vue'),
-    },
+    }
   ],
 })
 
