@@ -34,7 +34,7 @@ const { t } = useI18n({
       <LogoContainer />
     </section>
     <section class="flex gap-3">
-      <Button class="font-medium" v-if="props.authenticated">{{ t('logout') }}</Button>
+      <Button class="font-medium" v-if="props.authenticated"><RouterLink to="/login">{{ t('logout') }}</RouterLink></Button>
       <LanguageToggle />
     </section>
 
