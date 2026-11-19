@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import Button from '@/components/Button.vue';
-import type GlobalState from '@/ts/GlobalState';
+import { state } from '@/ts/GlobalState';
 import { inject, type Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-const state: Ref<GlobalState> = inject("state") as Ref<GlobalState>;
 
 const { t } = useI18n({
   useScope: "local",

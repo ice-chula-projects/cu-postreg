@@ -1,17 +1,8 @@
 <script setup lang="ts">
-import { provide, ref, type Ref } from 'vue';
 import Header from './components/Header.vue';
 import Sidebar from './components/Sidebar.vue';
 import { RouterView } from 'vue-router';
-import type GlobalState from './ts/GlobalState.ts';
-
-
-
-const state: GlobalState = {name: "", id: "", loggedIn: false};
-
-//this method doesnt work, needs to be change
-provide<Ref<GlobalState>>("state", ref<GlobalState>(state));
-
+import { state } from './ts/GlobalState.ts';
 </script>
 
 <template>
