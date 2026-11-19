@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { state } from '@/ts/GlobalState'
 import { ref, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -88,6 +89,7 @@ const { t } = useI18n({
     "
     :style="{ width: `${sidebarWidth}px` }"
   >
+  <div class="flex flex-col h-full">
     <template v-for="(links, topic) in topics">
       <section>
         <h3 class="font-semibold font-chulalongkorn text-primary text-lg">{{ t(topic) }}</h3>
@@ -109,6 +111,15 @@ const { t } = useI18n({
       </section>
       <hr class="border-separator my-2">
     </template>
+    
+    <div class="mt-auto bg-white rounded-md h-14 p-1 flex-row flex border border-gray-400">
+      <img src="/images/User Icon.png" class="h-full">
+      <div class="flex flex-col m-auto">
+        <p class="font-bold text-sm">{{state.id}}</p>
+        <p class="text-xs">Mr. FIRSTNAME LASTNAME</p>
+      </div>
+    </div>
+  </div>
     
     <!-- Resize handle -->
     <div
