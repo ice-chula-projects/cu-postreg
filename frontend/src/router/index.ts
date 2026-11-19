@@ -10,8 +10,18 @@ const router = createRouter({
     },
     {
       path: '/register',
-      name: 'Register for courses',
-      component: () => import('@/views/RegistrationView.vue'),
+      children: [
+        {
+          path: '',
+          name: 'Register landing page',
+          component: () => import('@/views/RegistrationView.vue'),
+        },
+        {
+          path: 'courses',
+          name: 'Register courses',
+          component: () => import('@/views/RegisterCoursesView.vue'),
+        },
+      ],
     },
     {
       path: '/drop',

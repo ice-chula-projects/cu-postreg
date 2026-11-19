@@ -1,6 +1,20 @@
 <script setup lang="ts">
 import Button from '@/components/Button.vue';
+import { computed, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const registrationCode = ref("")
+const validated = computed(() => registrationCode.value.length == 6)
+
+const handleSubmit = () => {
+  if (!validated.value) {
+    return
+  }
+  router.push('/register/courses')
+  sessionStorage.setItem("registrationCode", registrationCode.value)
+}
 
 const { t } = useI18n({
   useScope: "local",
@@ -45,6 +59,12 @@ const { t } = useI18n({
     },
   }
 })
+
+onMounted(() => {
+  if (sessionStorage.getItem("registrationCode") != null) {
+    router.push("register/courses")
+  }
+})
 </script>
 
 <template>
@@ -59,7 +79,10 @@ const { t } = useI18n({
     <p class="text-text-muted font-medium text-sm">{{ t('faculty') }}</p>
     <p class="mt-2 text-primary-dark font-semibold">{{ t('name') }} (6738123421)</p>
   </section>
-  <form class="flex items-center justify-center-safe gap-2 mt-3">
+  <form
+    class="flex items-center justify-center-safe gap-2 mt-3"
+    @submit.prevent="handleSubmit"
+  >
     <label for="registrationCode" class="text-text-muted font-bold">
       {{ t('registrationCode') }}
     </label>
@@ -68,8 +91,11 @@ const { t } = useI18n({
       id="registrationCode"
       class="border border-separator rounded-md py-1 px-2"
       :placeholder="t('placeholder') + ' ABC123'"
+      v-model="registrationCode"
     />
-    <Button type="submit">{{ t('enter') }}</Button>
+    <Button type="submit" :disabled="!validated">
+      {{ t('enter') }}
+    </Button>
   </form>
   <div class="
     flex flex-col justify-center mx-5 lg:mx-15 my-2 rounded-lg p-5
