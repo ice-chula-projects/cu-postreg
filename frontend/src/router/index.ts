@@ -31,6 +31,10 @@ router.beforeEach((to, from) => {
   if(!state.value.loggedIn && to.path != "/login") {
     return { path: "/login" };
   }
+
+  if(state.value.loggedIn && to.path == "/login") {
+    return { path: "/" };
+  }
 })
 
 export default router

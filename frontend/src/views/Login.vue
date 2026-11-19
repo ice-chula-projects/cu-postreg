@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Button from '@/components/Button.vue';
+import router from '@/router';
 import { state } from '@/ts/GlobalState';
 import { inject, type Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -35,8 +36,8 @@ function onForgetPassword(){
 }
 
 function login(){
-  state.value.loggedIn = !state.value.loggedIn;
-  console.log(state);
+  state.value.loggedIn = true;
+  router.push("/")
 }
 </script>
 
