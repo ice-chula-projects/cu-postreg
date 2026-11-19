@@ -125,7 +125,7 @@ function login(){
     
     <a class="text-blue-500 underline" href="#" @click="onForgetPassword"> {{t('forgotPasswordText')}} </a>
     <!-- fake captcha -->
-     <div class="border-2 border-gray-200 rounded-md w-[200px] h-[60px] flex items-center p-2 bg-[#f9f9f9]" :class="{'border-red-300': isCaptchaError}">
+     <div class="border-2 border-gray-200 rounded-md w-50 h-15 flex items-center p-2 bg-[#f9f9f9]" :class="{'border-red-300': isCaptchaError}">
       <input type="checkbox" v-model="formData.captcha"></input>
       <p class="ml-2 text-[12px]">I'm not a robot</p>
       <img src="/images/reCaptcha Logo.png" class="h-full ml-auto"></img>
