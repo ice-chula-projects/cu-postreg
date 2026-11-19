@@ -3,12 +3,8 @@ import { useI18n } from 'vue-i18n';
 import Button from './Button.vue';
 import LanguageToggle from './LanguageToggle.vue';
 import LogoContainer from './LogoContainer.vue';
-
-const props = withDefaults(defineProps<{
-  authenticated?: boolean
-}>(), {
-  authenticated: false,
-})
+import { state } from '@/ts/GlobalState.ts';
+import router from '@/router/index.ts';
 
 const { t } = useI18n({
   useScope: "local",
@@ -21,6 +17,11 @@ const { t } = useI18n({
     }
   }
 })
+
+function logout(){
+  state.value.loggedIn = false;
+  router.push("/login");
+}
 </script>
 
 <template>
@@ -34,7 +35,7 @@ const { t } = useI18n({
       <LogoContainer />
     </section>
     <section class="flex gap-3">
-      <Button class="font-medium" v-if="props.authenticated">{{ t('logout') }}</Button>
+      <Button class="font-medium" v-if="state.loggedIn" @click="logout">{{ t('logout') }}</Button>
       <LanguageToggle />
     </section>
 

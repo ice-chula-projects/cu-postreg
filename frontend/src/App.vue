@@ -7,7 +7,7 @@ import { state } from './ts/GlobalState.ts';
 
 <template>
   <div class="flex h-screen flex-col overflow-hidden">
-    <Header :authenticated="state.loggedIn" />
+    <Header />
     <div class="flex flex-1 min-h-0 overflow-hidden">
       <Sidebar v-if="state.loggedIn"/>
       <main class="flex-1 min-w-0 overflow-y-auto">
