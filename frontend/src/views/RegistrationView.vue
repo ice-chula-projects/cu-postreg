@@ -46,11 +46,11 @@ const { t } = useI18n({
       placeholder: "เช่น",
       enter: "บันทึก",
       remarks: {
-        courseRegistrationRemarks: "Course Registration Remarks",
-        mustContactAdvisor: "Students must contact their academic advisors to obtain the registration code.",
-        mustRequestNewCodeNextSemester: "The registration code is used for regular registration or late registration, and students must request a new registration for the following semester.",
-        summerAndNextYearIsTheSame: "The registration code for the summer semester and the next academic year’s first semester is the same.",
-        contactIfProblems: "If you encounter any problems regarding registration, contact your affiliated faculty or email",
+        courseRegistrationRemarks: "การบันทึกรหัสการลงทะเบียนเรียนของนิสิตระดับปริญญาบัณฑิต",
+        mustContactAdvisor: "นิสิตสามารถติดต่อรับรหัสการลงทะเบียนเรียนได้ที่อาจารย์ที่ปรึกษา",
+        mustRequestNewCodeNextSemester: "รหัสการลงทะเบียนเรียนจะใช้สำหรับการลงทะเบียนเรียนปกติ หรือลงทะเบียนเรียนสาย และนิสิตต้องขอรับรหัสการลงทะเบียนเรียนใหม่ของภาคการศึกษาถัดไป",
+        summerAndNextYearIsTheSame: "รหัสการลงทะเบียนเรียนภาคฤดูร้อนและภาคการศึกษาต้นของปีการศึกษาถัดไปใช้รหัสเดียวกัน",
+        contactIfProblems: "หากพบปัญหาเกี่ยวกับรหัสการลงทะเบียนเรียน โปรดติดต่อคณะที่นิสิตสังกัด หรือ Email",
       },
       fullstop: "",
     },
@@ -96,9 +96,9 @@ onMounted(() => {
   </form>
   <div class="
     flex flex-col justify-center mx-5 lg:mx-15 my-2 rounded-lg p-5
-    bg-surface border border-separator
+    bg-surface/40 border border-separator
   ">
-    <h2 class="font-chulalongkorn text-primary-dark font-bold text-xl">{{ t('remarks.courseRegistrationRemarks') }}</h2>
+    <h2 class="font-chulalongkorn text-primary-dark font-bold text-xl mb-2">{{ t('remarks.courseRegistrationRemarks') }}</h2>
     <ol class="list-decimal ml-5 flex flex-col gap-2">
       <li class="text-text">{{ t('remarks.mustContactAdvisor') }}</li>  
       <li class="text-text">{{ t('remarks.mustRequestNewCodeNextSemester') }}</li>  
