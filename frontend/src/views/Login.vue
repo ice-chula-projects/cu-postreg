@@ -5,6 +5,12 @@ import { state } from '@/ts/GlobalState';
 import { inject, reactive, ref, type Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+enum ErrorTextId{
+  studentIdContainsNonNumeric,
+  studentIdMustBe10Long,
+  passwordMustBeEntered
+}
+
 const { t } = useI18n({
   useScope: "local",
   messages: {
@@ -16,7 +22,12 @@ const { t } = useI18n({
       passwordFormLabel: "Password",
       passwordFormPlaceholder: "Enter Password...",
       loginButtonText: "Login",
-      forgotPasswordText: "Forgot password?"
+      forgotPasswordText: "Forgot password?",
+      errorText:{
+        [ErrorTextId.studentIdContainsNonNumeric]: "Student id must only contain digits",
+        [ErrorTextId.studentIdMustBe10Long]: "Student id must be exactly 10 characters long",
+        [ErrorTextId.passwordMustBeEntered]: "Please enter a password"
+      }
     },
     th: {
       officeOfTheRegistrar: "สำนักงานการทะเบียน",
@@ -26,10 +37,16 @@ const { t } = useI18n({
       passwordFormLabel: "REPLACE ME",
       passwordFormPlaceholder: "REPLACE ME",
       loginButtonText: "REPLACE ME",
-      forgotPasswordText: "REPLACE ME"
+      forgotPasswordText: "REPLACE ME",
+      errorText:{
+        [ErrorTextId.studentIdContainsNonNumeric]: "REPLACE ME",
+        [ErrorTextId.studentIdMustBe10Long]: "REPLACE ME",
+        [ErrorTextId.passwordMustBeEntered]: "REPLACE ME"
+      }
     },
   }
 })
+
 
 const formData = reactive({
   studentId: "",
@@ -39,9 +56,9 @@ const formData = reactive({
 
 const isCaptchaError = ref(false);
 const isStudentIdError = ref(false);
-const studentIdErrorText = ref("");
+const studentIdErrorTextId = ref<ErrorTextId | null>(null);
 const isPasswordError = ref(false);
-const passwordErrorText = ref("");
+const passwordErrorTextId = ref<ErrorTextId | null>(null);
 
 
 
@@ -52,26 +69,26 @@ function onForgetPassword(){
 function validateForm(): boolean{
   isCaptchaError.value = false;
 
-  studentIdErrorText.value = "";
-  passwordErrorText.value = "";
+  studentIdErrorTextId.value = null;
+  passwordErrorTextId.value = null;
 
   if (!formData.captcha){
     isCaptchaError.value = true;
   }
 
   if (/[^0-9]/gi.test(formData.studentId)) {
-    studentIdErrorText.value = "Student id must only contain digits";
+    studentIdErrorTextId.value = ErrorTextId.studentIdContainsNonNumeric;
   }
   else if (formData.studentId.length != 10) {
-    studentIdErrorText.value = "Student id must be exactly 10 characters long";
+    studentIdErrorTextId.value = ErrorTextId.studentIdMustBe10Long;
   }
 
   if(formData.password.length <= 0){
-    passwordErrorText.value = "Please enter a password";
+    passwordErrorTextId.value = ErrorTextId.passwordMustBeEntered;
   }
   
-  isStudentIdError.value = studentIdErrorText.value != "";
-  isPasswordError.value = passwordErrorText.value != "";
+  isStudentIdError.value = studentIdErrorTextId.value != null;
+  isPasswordError.value = passwordErrorTextId.value != null;
 
   return !(isCaptchaError.value || isStudentIdError.value);
 }
@@ -107,7 +124,7 @@ function login(){
         :placeholder="t('studentIdFormPlaceholder')"
         v-model="formData.studentId"
       />
-      <p class="text-red-600 text-xs" v-if="isStudentIdError">{{ studentIdErrorText }}</p>
+      <p class="text-red-600 text-xs" v-if="isStudentIdError">{{ t("errorText." + studentIdErrorTextId) }}</p>
     </div>
     <div>
       <label for="password" class="text-text-muted font-bold">
@@ -120,7 +137,7 @@ function login(){
         :placeholder="t('passwordFormPlaceholder')"
         v-model="formData.password"
         />
-      <p class="text-red-600 text-xs" v-if="isPasswordError">{{ passwordErrorText }}</p>
+      <p class="text-red-600 text-xs" v-if="isPasswordError">{{ t("errorText." + passwordErrorTextId) }}</p>
     </div>
     
     <a class="text-blue-500 underline" href="#" @click="onForgetPassword"> {{t('forgotPasswordText')}} </a>
