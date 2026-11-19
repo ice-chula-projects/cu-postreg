@@ -10,7 +10,7 @@ const { t } = useI18n({
       announcementsLabel: "Announcements"
     },
     th: {
-      announcementsLabel: "REPLACE ME"
+      announcementsLabel: "ประกาศ"
     },
   },
 })
@@ -27,8 +27,8 @@ const { t } = useI18n({
 
     <div>
       <div class="self-start flex">
-        <img src="/images/announcement.jpg" class="w-20 mt-auto">
-        <h1 class="font-bold text-4xl mt-auto">{{ t("announcementsLabel") }}</h1>
+        <img src="/images/announcement.jpg" class="h-15 mt-auto">
+        <h1 class="font-bold font-chulalongkorn text-4xl mt-auto">{{ t("announcementsLabel") }}</h1>
       </div>
       <div class="border-red-100 rounded-2xl border-2 w-160 h-100 p-2 overflow-scroll">
       <h3 class="font-bold">27 Sep 2026</h3>
