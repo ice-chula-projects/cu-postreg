@@ -3,17 +3,8 @@ import { useI18n } from 'vue-i18n';
 import Button from './Button.vue';
 import LanguageToggle from './LanguageToggle.vue';
 import LogoContainer from './LogoContainer.vue';
-import type GlobalState from '@/ts/GlobalState';
-import { inject, type Ref } from 'vue';
-import router from '@/router';
-
-const state: Ref<GlobalState> = inject("state") as Ref<GlobalState>;
-
-const props = withDefaults(defineProps<{
-  authenticated?: boolean
-}>(), {
-  authenticated: false,
-})
+import { defaultState, resetGlobalStateToDefault, state } from '@/ts/GlobalState.ts';
+import router from '@/router/index.ts';
 
 const { t } = useI18n({
   useScope: "local",
@@ -26,6 +17,12 @@ const { t } = useI18n({
     }
   }
 })
+
+function logout(){
+  state.value.loggedIn = false;
+  state.value.id = defaultState.id;
+  router.push("/login");
+}
 </script>
 
 <template>
@@ -39,7 +36,7 @@ const { t } = useI18n({
       <LogoContainer />
     </section>
     <section class="flex gap-3">
-      <Button class="font-medium" v-if="props.authenticated" @click="() => { state.loggedIn = false; router.push('/login') }">{{ t('logout') }}</Button>
+      <Button class="font-medium" v-if="state.loggedIn" @click="logout">{{ t('logout') }}</Button>
       <LanguageToggle />
     </section>
 

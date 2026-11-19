@@ -1,3 +1,4 @@
+import { state } from '@/ts/GlobalState'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -34,6 +35,16 @@ const router = createRouter({
       component: () => import('@/views/DropView.vue'),
     }
   ],
+})
+
+router.beforeEach((to, from) => {
+  if(!state.value.loggedIn && to.path != "/login") {
+    return { path: "/login" };
+  }
+
+  if(state.value.loggedIn && to.path == "/login") {
+    return { path: "/" };
+  }
 })
 
 export default router

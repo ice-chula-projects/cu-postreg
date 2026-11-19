@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { provide, ref, type Ref } from 'vue';
 import Header from './components/Header.vue';
 import Sidebar from './components/Sidebar.vue';
 import { RouterView } from 'vue-router';
-import type GlobalState from './ts/GlobalState.ts';
+import { state } from './ts/GlobalState.ts';
+import { watch } from 'vue';
 
+const storedState = sessionStorage.getItem("state");
+if(storedState != null) state.value = JSON.parse(storedState);
 
-
-const state: Ref<GlobalState> = ref({name: "", id: "", loggedIn: false});
-
-//this method doesnt work, needs to be change
-provide<Ref<GlobalState>>("state", state);
+watch(state, () => {
+  sessionStorage.setItem("state", JSON.stringify(state.value));
+}, {deep: true})
 
 </script>
 
 <template>
   <div class="flex h-screen flex-col overflow-hidden">
-    <Header :authenticated="state.loggedIn" />
+    <Header />
     <div class="flex flex-1 min-h-0 overflow-hidden">
       <Sidebar v-if="state.loggedIn"/>
       <main class="flex-1 min-w-0 overflow-y-auto">
