@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Button from '@/components/Button.vue';
+import router from '@/router';
 import type GlobalState from '@/ts/GlobalState';
 import { inject, type Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -33,8 +34,9 @@ const { t } = useI18n({
 })
 
 function login(){
-  state.value.loggedIn = !state.value.loggedIn;
+  state.value.loggedIn = true;
   console.log(state);
+  router.push('/');
 }
 </script>
 
@@ -79,6 +81,6 @@ function login(){
       <input type="checkbox"></input>
       <p class="ml-2 text-[12px]">I'm not a robot</p>
      </div>
-    <Button type="submit" @click="() => { state.loggedIn = true }"><RouterLink to="/">{{ t('loginButtonText') }}</RouterLink></Button>
+    <Button type="submit">{{ t('loginButtonText') }}</Button>
   </form>
 </template>

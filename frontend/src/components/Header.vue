@@ -5,6 +5,7 @@ import LanguageToggle from './LanguageToggle.vue';
 import LogoContainer from './LogoContainer.vue';
 import type GlobalState from '@/ts/GlobalState';
 import { inject, type Ref } from 'vue';
+import router from '@/router';
 
 const state: Ref<GlobalState> = inject("state") as Ref<GlobalState>;
 
@@ -38,7 +39,7 @@ const { t } = useI18n({
       <LogoContainer />
     </section>
     <section class="flex gap-3">
-      <Button class="font-medium" v-if="props.authenticated" @click="() => state.loggedIn = false"><RouterLink to="/login">{{ t('logout') }}</RouterLink></Button>
+      <Button class="font-medium" v-if="props.authenticated" @click="() => { state.loggedIn = false; router.push('/login') }">{{ t('logout') }}</Button>
       <LanguageToggle />
     </section>
 
