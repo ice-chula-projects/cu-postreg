@@ -41,7 +41,7 @@ const { t } = useI18n({
     th: {
       officeOfTheRegistrar: "สำนักงานการทะเบียน",
       chulalongkornUniversity: "จุฬาลงกรณ์มหาวิทยาลัย",
-      semester: "ภาคเรียนศึกษาต้น",
+      semester: "ภาคการศึกษาต้น",
       academicYear: "ปีการศึกษา 2569",
       faculty: "คณะวิศวกรรมศาสตร์",
       name: "น.ส. อลิส ลอเรนต์",
