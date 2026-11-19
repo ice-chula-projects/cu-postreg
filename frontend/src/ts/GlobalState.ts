@@ -1,13 +1,15 @@
 import { ref } from "vue";
-
+import * as CourseRegistration from "@/ts/CourseRegistration";
 export interface GlobalState {
   id: string;
   loggedIn: boolean;
+  coursesRegistered: CourseRegistration.Row[];
 }
 
 export const defaultState: GlobalState = {
   id: "",
-  loggedIn: false
+  loggedIn: false,
+  coursesRegistered: []
 }
 
 export const state = ref<GlobalState>(Object.assign({}, defaultState));
