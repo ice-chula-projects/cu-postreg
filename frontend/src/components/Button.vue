@@ -4,9 +4,11 @@ import { computed } from 'vue'
 const props = withDefaults(defineProps<{
   variant?: 'primary' | 'secondary' | 'outline' | 'subtle' | 'ghost',
   title?: string
+  disabled?: boolean
 }>(), {
   variant: 'primary',
-  title: ""
+  title: "",
+  disabled: false,
 })
 
 const variants = {
@@ -46,12 +48,14 @@ const variantClasses = computed(() => variants[props.variant])
       'cursor-pointer',
       'rounded-md px-3 py-2',
       'transition-all duration-200 ease-out',
-      'hover:-translate-y-0.5 hover:shadow-lg',
-      'active:translate-y-0 active:scale-[0.97] active:shadow-sm',
+      props.disabled ? null : 'hover:-translate-y-0.5 hover:shadow-lg',
+      props.disabled ? null : 'active:translate-y-0 active:scale-[0.97] active:shadow-sm',
       'focus-visible:outline-2 focus-visible:outline-offset-2',
       'motion-reduce:transition-none',
+      'disabled:opacity-50',
       variantClasses,
     ]"
+    :disabled="props.disabled"
     :title="props.title"
   >
     <slot />
