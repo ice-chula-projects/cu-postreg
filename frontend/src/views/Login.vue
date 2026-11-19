@@ -141,7 +141,7 @@ function login(){
      <div class="border-2 border-gray-200 rounded-md w-50 h-15 flex items-center p-2 bg-[#f9f9f9]" :class="{'border-red-300': isCaptchaError}">
       <input type="checkbox" v-model="formData.captcha"></input>
       <p class="ml-2 text-[12px]">I'm not a robot</p>
-      <img src="/images/reCaptcha Logo.png" class="h-full ml-auto"></img>
+      <img src="/images/reCAPTCHA.svg" class="h-full ml-auto"></img>
      </div>
     <Button type="submit">{{ t('loginButtonText') }}</Button>
   </form>
