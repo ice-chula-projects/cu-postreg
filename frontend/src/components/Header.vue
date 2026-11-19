@@ -3,7 +3,7 @@ import { useI18n } from 'vue-i18n';
 import Button from './Button.vue';
 import LanguageToggle from './LanguageToggle.vue';
 import LogoContainer from './LogoContainer.vue';
-import { state } from '@/ts/GlobalState.ts';
+import { defaultState, resetGlobalStateToDefault, state } from '@/ts/GlobalState.ts';
 import router from '@/router/index.ts';
 
 const { t } = useI18n({
@@ -20,6 +20,7 @@ const { t } = useI18n({
 
 function logout(){
   state.value.loggedIn = false;
+  state.value.id = defaultState.id;
   router.push("/login");
 }
 </script>
