@@ -4,7 +4,6 @@ import { state } from '@/ts/GlobalState';
 import { inject, type Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-
 const { t } = useI18n({
   useScope: "local",
   messages: {
@@ -30,6 +29,10 @@ const { t } = useI18n({
     },
   }
 })
+
+function onForgetPassword(){
+  alert("this feature is not implemented");
+}
 
 function login(){
   state.value.loggedIn = !state.value.loggedIn;
@@ -71,12 +74,12 @@ function login(){
       />
     </div>
     
-    <a class="text-blue-500 underline", href="#"> {{t('forgotPasswordText')}} </a>
-    
+    <a class="text-blue-500 underline" href="#" @click="onForgetPassword"> {{t('forgotPasswordText')}} </a>
     <!-- fake captcha -->
      <div class="border-2 border-gray-200 rounded-md w-[200px] h-[60px] flex items-center p-2 bg-[#f9f9f9]">
       <input type="checkbox"></input>
       <p class="ml-2 text-[12px]">I'm not a robot</p>
+      <img src="/images/reCaptcha Logo.png" class="h-[100%] ml-auto"></img>
      </div>
     <Button type="submit" >{{ t('loginButtonText') }}</Button>
   </form>
