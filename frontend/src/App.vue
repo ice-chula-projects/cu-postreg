@@ -4,6 +4,7 @@ import Sidebar from './components/Sidebar.vue';
 import { RouterView } from 'vue-router';
 import { state } from './ts/GlobalState.ts';
 import { watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 const storedState = sessionStorage.getItem("state");
 if(storedState != null) state.value = JSON.parse(storedState);
@@ -11,6 +12,20 @@ if(storedState != null) state.value = JSON.parse(storedState);
 watch(state, () => {
   sessionStorage.setItem("state", JSON.stringify(state.value));
 }, {deep: true})
+
+const { t } = useI18n({
+  useScope: "global",
+  messages: {
+    en: {
+      officeOfTheRegistrar: "OFFICE OF THE REGISTRAR",
+      chulalongkornUniversity: "Chulalongkorn University",
+    },
+    th: {
+      officeOfTheRegistrar: "สำนักงานการทะเบียน",
+      chulalongkornUniversity: "จุฬาลงกรณ์มหาวิทยาลัย",
+    },
+  }
+})
 
 </script>
 

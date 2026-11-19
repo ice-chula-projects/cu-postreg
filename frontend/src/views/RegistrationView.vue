@@ -20,8 +20,6 @@ const { t } = useI18n({
   useScope: "local",
   messages: {
     en: {
-      officeOfTheRegistrar: "OFFICE OF THE REGISTRAR",
-      chulalongkornUniversity: "Chulalongkorn University",
       semester: "First Semester",
       academicYear: "Academic Year 2026",
       faculty: "Faculty of Engineering",
@@ -39,8 +37,6 @@ const { t } = useI18n({
       fullstop: ".",
     },
     th: {
-      officeOfTheRegistrar: "สำนักงานการทะเบียน",
-      chulalongkornUniversity: "จุฬาลงกรณ์มหาวิทยาลัย",
       semester: "ภาคการศึกษาต้น",
       academicYear: "ปีการศึกษา 2569",
       faculty: "คณะวิศวกรรมศาสตร์",

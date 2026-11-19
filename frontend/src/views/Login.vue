@@ -15,8 +15,6 @@ const { t } = useI18n({
   useScope: "local",
   messages: {
     en: {
-      officeOfTheRegistrar: "OFFICE OF THE REGISTRAR",
-      chulalongkornUniversity: "Chulalongkorn University",
       studentIdFormLabel: "Student ID",
       studentIdFormPlaceholder: "Enter Student ID...",
       passwordFormLabel: "Password",
@@ -30,8 +28,6 @@ const { t } = useI18n({
       }
     },
     th: {
-      officeOfTheRegistrar: "สำนักงานการทะเบียน",
-      chulalongkornUniversity: "จุฬาลงกรณ์มหาวิทยาลัย",
       studentIdFormLabel: "REPLACE ME",
       studentIdFormPlaceholder: "REPLACE ME",
       passwordFormLabel: "REPLACE ME",
