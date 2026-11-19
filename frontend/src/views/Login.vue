@@ -114,7 +114,7 @@ function login(){
         {{ t('passwordFormLabel') }}:
       </label>
       <input
-        type="text"
+        type="password"
         id="password"
         class="border border-separator rounded-md py-1 px-2 ml-1"
         :placeholder="t('passwordFormPlaceholder')"
