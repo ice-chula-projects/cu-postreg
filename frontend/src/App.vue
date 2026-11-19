@@ -3,6 +3,15 @@ import Header from './components/Header.vue';
 import Sidebar from './components/Sidebar.vue';
 import { RouterView } from 'vue-router';
 import { state } from './ts/GlobalState.ts';
+import { watch } from 'vue';
+
+const storedState = sessionStorage.getItem("state");
+if(storedState != null) state.value = JSON.parse(storedState);
+
+watch(state, () => {
+  sessionStorage.setItem("state", JSON.stringify(state.value));
+}, {deep: true})
+
 </script>
 
 <template>
