@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Button from '@/components/Button.vue';
+import { state } from '@/ts/GlobalState';
 import { computed, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router'
@@ -23,7 +24,7 @@ const { t } = useI18n({
       semester: "First Semester",
       academicYear: "Academic Year 2026",
       faculty: "Faculty of Engineering",
-      name: "Ms. Alice Laurent",
+      name: "Mr. FIRSTNAME LASTNAME",
       registrationCode: "Registration Code",
       placeholder: "Ex.",
       enter: "Enter",
@@ -40,7 +41,7 @@ const { t } = useI18n({
       semester: "ภาคการศึกษาต้น",
       academicYear: "ปีการศึกษา 2569",
       faculty: "คณะวิศวกรรมศาสตร์",
-      name: "น.ส. อลิส ลอเรนต์",
+      name: "นายชื่อจริง นามสกุล",
       registrationCode: "รหัสการลงทะเบียนเรียน",
       placeholder: "เช่น",
       enter: "บันทึก",
@@ -73,7 +74,7 @@ onMounted(() => {
     <p class="font-chulalongkorn text-xl text-text">{{ t('chulalongkornUniversity') }}</p>
     <p class="mt-2 text-text-muted text-sm">{{ t('semester') }} / {{ t('academicYear') }}</p>
     <p class="text-text-muted font-medium text-sm">{{ t('faculty') }}</p>
-    <p class="mt-2 text-primary-dark font-semibold">{{ t('name') }} (6738123421)</p>
+    <p class="mt-2 text-primary-dark font-semibold">{{ t('name') }} ({{ state.id }})</p>
   </section>
   <form
     class="flex items-center justify-center-safe gap-2 mt-3"
