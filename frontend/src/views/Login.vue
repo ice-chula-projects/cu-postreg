@@ -79,6 +79,6 @@ function login(){
       <input type="checkbox"></input>
       <p class="ml-2 text-[12px]">I'm not a robot</p>
      </div>
-    <Button type="submit" >{{ t('loginButtonText') }}</Button>
+    <Button type="submit" @click="() => { state.loggedIn = true }"><RouterLink to="/">{{ t('loginButtonText') }}</RouterLink></Button>
   </form>
 </template>
