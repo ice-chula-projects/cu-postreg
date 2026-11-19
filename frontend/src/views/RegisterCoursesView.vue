@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Button from '@/components/Button.vue';
+import CourseRegistration from '@/components/CourseRegistration.vue';
 import { computed, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router'
@@ -42,12 +42,6 @@ const { t } = useI18n({
   <div class="bg-surface flex justify-center w-fit mx-auto border border-separator rounded-lg shadow-md my-2">
     <h3 class="py-2 px-3 font-chulalongkorn font-bold text-text">Course Registration</h3>
   </div>
-  <form>
-    <table class="table-auto">
-      <thead>
-        <tr>Course</tr>
-      </thead>
-    </table>
-  </form>
+  <CourseRegistration />
 </div>
 </template>
