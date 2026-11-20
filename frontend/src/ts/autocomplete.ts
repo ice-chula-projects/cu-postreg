@@ -29,7 +29,39 @@ export function computeLevenshteinDistance(stringA: string, stringB: string): nu
     return levenshteinMatrix[length]![length]!;
 }
 
-export function computeIdSimilarityScore(inputIdString: string, course: Course){
+export function computeIdSimilarityScore(inputIdString: string, course: Course): number{
     //negative since a lower distance is better, now a distance of 1 will score better than a distance of 3 since (-1 > -3)
     return -computeLevenshteinDistance(inputIdString, course.id);
+}
+
+export function computeNameSimilarityScore(inputNameString: string, course: Course): number{
+    inputNameString = inputNameString.toLowerCase().trim();
+    const courseName = course.name.toLowerCase().trim();
+    const keywords = course.keywords.map(x=>x.toLowerCase().trim());
+
+    let score = 0
+
+    //loop through all words of input and courseName and use the best score found
+    //this way inputs like "design" can still get good score for names like "game design"
+    //since Levenshtein distance matches only left to right
+    let matchScore = Infinity;
+    for(const word of inputNameString.split(" ")){
+        let bestWordScore = Math.min(...courseName.split(" ").map(x=>computeLevenshteinDistance(word, x)));
+
+        if (bestWordScore < matchScore){
+            matchScore = bestWordScore
+        };
+    }
+
+    let keywordScore = Infinity;
+    for(const word of inputNameString.split(" ")){
+        let bestWordScore = Math.min(...keywords.map(x=>computeLevenshteinDistance(word, x)));
+
+        if (bestWordScore < keywordScore){
+            keywordScore = bestWordScore
+        };
+    }
+
+    //negative since a lower score is better
+    return -Math.min(matchScore, keywordScore);
 }
