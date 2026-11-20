@@ -5,6 +5,7 @@ import { courses, getCourseFromId } from '@/ts/courses'
 import type { Row } from '@/ts/CourseRegistration'
 import { state } from '@/ts/GlobalState.ts';
 import { useI18n } from 'vue-i18n';
+import AutocompleteInput from './AutocompleteInput.vue';
 
 const { t } = useI18n({
   useScope: "local",
@@ -164,7 +165,7 @@ function openConfirmation() {
         <div class="px-4 font-bold">{{ index + 1 }}</div>
 
         <div class="px-4">
-          <input
+          <AutocompleteInput
             v-model="row.courseId"
             type="text"
             :disabled="row.isSaved"
