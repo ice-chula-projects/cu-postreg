@@ -5,7 +5,7 @@ const props = defineProps<{
     options: Type[];
     //function that gives a numeric value for how similiar the text input is to this option
     //autocomplete will be sorted descending according to this function
-    similarityScoreFunction: (textInput:string, a:Type) => number;
+    similarityScoreFunction: (textInput:string, x:Type) => number;
     renderingFunction: (x:Type) => VNodeChild;
     //what to display in the input box when an option is selected
     selectedValueFunction: (x:Type) => string;
@@ -14,7 +14,6 @@ const props = defineProps<{
 const emit = defineEmits<{
     select: [Type]
 }>()
-
 const isFocused = ref(false);
 const inputValue = ref("");
 const inputElement = ref<HTMLInputElement | null>(null);
