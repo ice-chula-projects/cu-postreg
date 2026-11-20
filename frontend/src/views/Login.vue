@@ -2,6 +2,7 @@
 import Button from '@/components/Button.vue';
 import router from '@/router';
 import { state } from '@/ts/GlobalState';
+import { Lock, User } from 'lucide-vue-next';
 import { inject, reactive, ref, type Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -110,8 +111,8 @@ function login(){
   <form @submit.prevent="login" class="flex items-center justify-center-safe gap-2 mt-3 flex-col">
     <!-- inputs -->
     <div>
-      <label for="studentId" class="text-text-muted font-bold">
-      {{ t('studentIdFormLabel') }}:
+      <label for="studentId" class="text-primary-dark font-bold">
+        <User class="inline"/>
       </label>
       <input
         type="text"
@@ -123,8 +124,8 @@ function login(){
       <p class="text-red-600 text-xs" v-if="isStudentIdError">{{ t("errorText." + studentIdErrorTextId) }}</p>
     </div>
     <div>
-      <label for="password" class="text-text-muted font-bold">
-        {{ t('passwordFormLabel') }}:
+      <label for="password" class="text-primary-dark font-bold">
+        <Lock class="inline"/>
       </label>
       <input
         type="password"
@@ -136,7 +137,7 @@ function login(){
       <p class="text-red-600 text-xs" v-if="isPasswordError">{{ t("errorText." + passwordErrorTextId) }}</p>
     </div>
 
-    <a class="text-blue-500 underline" href="#" @click="onForgetPassword"> {{t('forgotPasswordText')}} </a>
+    <a class="text-blue-500 underline text-right" href="#" @click="onForgetPassword"> {{t('forgotPasswordText')}} </a>
     <!-- fake captcha -->
      <div class="border-2 border-gray-200 rounded-md w-50 h-15 flex items-center p-2 bg-[#f9f9f9]" :class="{'border-red-300': isCaptchaError}">
       <input type="checkbox" v-model="formData.captcha"></input>
