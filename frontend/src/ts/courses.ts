@@ -28,15 +28,15 @@ export const courses: Course[] = [
   { id: "2182214", name: "ELEC CIR ICE", credits: 3, keywords: ["Electrical", "Circuit"], tags: []},
   { id: "2190200", name: "DISCRETE STRUC", credits: 3, keywords: ["Structures", "Math", "Mathematics"], tags: []},
   { id: '2190222', name: 'FUND DS ALG', credits: 4, keywords: ["Fundamental", "Datastructures", "Algorithms", "DSA", "Java"], tags: ["Laptop"]},
-  { id: '2190513', name: 'DATA SCI', credits: 3, keywords: ["Data", "Science", "Python"], tags: ["Laptop", "Project"]},
+  { id: '2190513', name: 'DATA SCI', credits: 3, keywords: ["Data", "Science", "Python"], tags: ["Laptop", "Project", "AI"]},
   // Year 2, Second Semester
   { id: "2182204", name: "SIG LIN SYS", credits: 3, keywords: ["Signals", "Processing", "Linear", "Systems"], tags: ["Charnchai"]},
   { id: "2190512", name: "APP DEV", credits: 3, keywords: ["Application", "Development", "TypeScript"], tags: ["Laptop", "Project"]},
-  { id: "2190514", name: "AI", credits: 3, keywords: ["Artificial", "Intelligence", "Symbolic", "Prolog"], tags: ["Laptop", "Project"]},
+  { id: "2190514", name: "AI", credits: 3, keywords: ["Artificial", "Intelligence", "Symbolic", "Prolog"], tags: ["Laptop", "Project", "AI"]},
   { id: "5501214", name: "COMM PRES SKIL", credits: 3, keywords: ["Communication", "Presentation", "Skills", "English"], tags: ["Project"]},
   // Year 3, First Semester
   { id: '2190472', name: 'NETCENT ARCH', credits: 3, keywords: ["Netcentric", "Architecture"], tags: ["Project"]},
-  { id: '2190443', name: 'USER INT DSGN', credits: 3, keywords: ["User", "Interface", "Design", "UI"], tags: ["Laptop", "Project"]},
+  { id: '2190443', name: 'USER INT DSGN', credits: 3, keywords: ["User", "Interface", "Design", "UI"], tags: ["Laptop", "Project", "AI"]},
   { id: '2184301', name: 'ENG ECON APP', credits: 3, keywords: ["Engineering", "Economy", "Applications"], tags: ["Project"]},
   { id: '2182372', name: 'PRIN TELECOMM', credits: 3, keywords: ["Principles", "Telecommunications", "Tele", "Communications"], tags: ["Project"]},
   { id: '2190250', name: 'COMP ARCH ORG', credits: 3, keywords: ["Computer", "Architecture", "Organization"], tags: []},
@@ -48,7 +48,7 @@ export const courses: Course[] = [
   { id: "5600188", name: "QUAN COMP EMG TECH", credits: 3, keywords: ["Quantum", "Computing", "Emerging", "Technologies"], tags: ["Gened", "Laptop"]},
   // Electives
   { id: '2190523', name: 'GAME DESIGN', credits: 3, keywords: [], tags: ["Elective", "Project"]},
-  { id: '2190519', name: 'NLP', credits: 3, keywords: ["Natural", "Language", "Processing", "AI"], tags: ["Elective", "Laptop"]},
+  { id: '2190519', name: 'NLP', credits: 3, keywords: ["Natural", "Language", "Processing"], tags: ["Elective", "Laptop", "AI"]},
   // Free electives
   { id: "2223021", name: "COM JAP S/T I", credits: 3, keywords: ["Communicative", "Japanese"], tags: ["Free"]},
   { id: "2223022", name: "COM JAP S/T II", credits: 3, keywords: ["Communicative", "Japanese"], tags: ["Free"]},
