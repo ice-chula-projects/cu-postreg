@@ -54,14 +54,19 @@ export function computeNameSimilarityScore(inputNameString: string, course: Cour
     }
 
     let keywordScore = Infinity;
+    let exactKeywordMatches = 0;
+
     for(const word of inputNameString.split(" ")){
         let bestWordScore = Math.min(...keywords.map(x=>computeLevenshteinDistance(word, x)));
 
+        if (bestWordScore == 0) exactKeywordMatches++;
         if (bestWordScore < keywordScore){
             keywordScore = bestWordScore
         };
     }
 
     //negative since a lower score is better
-    return -Math.min(matchScore, keywordScore);
+    score = -Math.min(matchScore, keywordScore) + exactKeywordMatches;
+    
+    return score;
 }
