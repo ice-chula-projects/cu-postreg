@@ -8,14 +8,16 @@ const props = defineProps<{
     similarityScoreFunction: (textInput:string, x:Type) => number;
     renderingFunction: (x:Type) => VNodeChild;
     //what to display in the input box when an option is selected
-    selectedValueFunction: (x:Type) => string;
+    selectedValueFunction: (x: Type) => string;
+    disabled?: boolean;
+    initialValue?: string | null;
 }>()
 
 const emit = defineEmits<{
     select: [Type]
 }>()
 const isFocused = ref(false);
-const inputValue = ref("");
+const inputValue = ref(props.initialValue ?? "");
 const inputElement = ref<HTMLInputElement | null>(null);
 const optionsUlElement = ref<HTMLUListElement | null>(null);
 const selectedIndex = ref(0);
@@ -75,10 +77,12 @@ function scrollOptionIntoView(){
             @keydown.enter.prevent="onOptionSelect(selectedIndex)"
             ref="inputElement"
             type="text"
+            :disabled="disabled"
             autocomplete="off"
             v-model="inputValue"
+            class="py-2 pl-1"
         />
-        <div v-if="isFocused" class="absolute bg-white h-20 overflow-scroll w-full scrollbar-thin bor">
+        <div v-if="isFocused" class="absolute bg-white h-20 overflow-scroll w-full scrollbar-thin z-50">
             <ul ref="optionsUlElement">
                 <li
                     v-for="(option, index) in sortedOptions"

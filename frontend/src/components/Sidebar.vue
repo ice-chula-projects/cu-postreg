@@ -55,7 +55,7 @@ const topics: Record<string, Record<string, string>> = {
   },
   registration: {
     registerForCourses: '/register',
-    dropCourses: '/drop',
+    registrationResults: '/results',
   },
 }
 const { t } = useI18n({
@@ -66,7 +66,7 @@ const { t } = useI18n({
       announcements: "Announcements",
       registration: "Registration",
       registerForCourses: "Register For Courses",
-      dropCourses: "Drop Courses",
+      registrationResults: "Registration Results",
       name: "Mr. FIRSTNAME LASTNAME",
     },
     th: {
@@ -74,7 +74,7 @@ const { t } = useI18n({
       announcements: "ประกาศ",
       registration: "การลงทะเบียน",
       registerForCourses: "ลงทะเบียนปกติ",
-      dropCourses: "ลดวิชาเรียน",
+      registrationResults: "ผลการลงทะเบียนเรียน",
       name: "นายชื่อจริง นามสกุล",
     },
   }

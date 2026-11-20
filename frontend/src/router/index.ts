@@ -30,9 +30,9 @@ const router = createRouter({
       ],
     },
     {
-      path: '/drop',
-      name: 'Drop courses',
-      component: () => import('@/views/DropView.vue'),
+      path: '/results',
+      name: 'Registration Results',
+      component: () => import('@/views/RegistrationResultsView.vue'),
     }
   ],
 })
