@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref, reactive, type Reactive, computed } from 'vue'
+import { ref, reactive, type Reactive, computed, h } from 'vue'
 import Button from './Button.vue'
-import { courses, getCourseFromId } from '@/ts/courses'
+import { courses, getCourseFromId, type Course } from '@/ts/courses'
 import type { Row } from '@/ts/CourseRegistration'
 import { state } from '@/ts/GlobalState.ts';
 import { useI18n } from 'vue-i18n';
 import AutocompleteInput from './AutocompleteInput.vue';
+import { computeIdSimilarityScore } from '@/ts/autocomplete';
 
 const { t } = useI18n({
   useScope: "local",
@@ -57,15 +58,17 @@ const createId = () => `row-${nextId++}`
 
 
 
-function makeRow({ isSaved = false, courseId = '', section = null, sectionModifier = 'only', sectionSecondary = null, canceled = false } = {}): Reactive<Row> {
+function makeRow({ isSaved = false, courseId = '', courseName = null, section = null, sectionModifier = 'only', sectionSecondary = null, credits = null, canceled = false } = {}): Reactive<Row> {
   return reactive({
     id: createId(),
     isSaved,
     cancelled: false,
     courseId,
+    courseName,
     section,
     sectionModifier,
     sectionSecondary,
+    credits,
     canceled,
   })
 }
@@ -146,8 +149,8 @@ function openConfirmation() {
 
 <template>
   <div class="mx-auto max-w-5xl p-6">
-    <div class="overflow-hidden rounded-2xl border border-violet-300">
-      <div class="grid grid-cols-[56px_1fr_1fr_1.7fr_90px_84px] bg-blue-500 font-bold text-white font-chulalongkorn">
+    <div class="overflow-visible rounded-md border border-violet-300">
+      <div class="grid grid-cols-[56px_1fr_1fr_1.7fr_90px_84px] bg-blue-500 rounded-t-sm font-bold text-white font-chulalongkorn">
         <div class="px-4 py-4">{{ t('number') }}</div>
         <div class="px-4 py-4">{{ t('courseId') }}</div>
         <div class="px-4 py-4">{{ t('courseName') }}</div>
@@ -159,23 +162,31 @@ function openConfirmation() {
       <div
         v-for="(row, index) in rows"
         :key="row.id"
-        class="grid grid-cols-[56px_1fr_1fr_1.7fr_90px_84px] items-center border-t border-violet-300 bg-violet-200 py-3 transition-opacity"
+        class="grid grid-cols-[56px_1fr_1fr_1.7fr_90px_84px] items-center border-t border-violet-300 bg-violet-200 py-3 transition-opacity last:rounded-b-sm"
         :class="{ 'opacity-50': row.cancelled }"
       >
         <div class="px-4 font-bold">{{ index + 1 }}</div>
 
         <div class="px-4">
           <AutocompleteInput
-            v-model="row.courseId"
-            type="text"
+            :options="courses"
+            :similarity-score-function="computeIdSimilarityScore"
+            :rendering-function="(x) => { console.log(courses);  return h('p', {}, (x as Course).id + ' ' + (x as Course).name) }"
+            :selected-value-function="(x) => (x as Course).id"
+            :initial-value="row.courseId"
+            @select="(course) => {
+              row.courseId = course.id;
+              row.courseName = course.name;
+              row.credits = course.credits;
+            }"
             :disabled="row.isSaved"
             aria-label="Course ID"
-            class="w-full rounded-md border border-separator bg-surface px-3 py-2 disabled:bg-surface-alt disabled:text-text-disabled"
+            class="rounded-md border border-separator bg-surface disabled:bg-surface-alt disabled:text-text-disabled"
           />
         </div>
 
         <div class="truncate px-4">
-          {{ getCourseFromId(row.courseId)?.name }}
+          {{ row.courseName ?? "-" }}
         </div>
 
         <div class="flex items-center gap-2 px-4">
@@ -209,7 +220,7 @@ function openConfirmation() {
         </div>
 
         <div class="px-4 text-slate-700">
-          {{ getCourseFromId(row.courseId)?.credits }}
+          {{ row.credits ?? "-" }}
         </div>
 
         <div class="flex justify-center px-4">
@@ -224,7 +235,7 @@ function openConfirmation() {
       </div>
     </div>
 
-    <div class="mt-4 flex gap-4 items-end">
+    <div class="mt-4 flex gap-4 justify-end items-end">
       <div class="mt-4 flex gap-4 items-end">
         <Button variant="subtle" @click="addRow">
           {{ t('addRow') }}
