@@ -23,11 +23,13 @@ const { t } = useI18n({
       declarationOfIntent: "Declaration of Intent (Form CR11)",
       semester: "First Semester",
       academicYear: "Academic Year 2026",
+      courseRegistration: "Course Registration",
     },
     th: {
       declarationOfIntent: "แสดงความจำนง (จท 11)",
       semester: "ภาคการศึกษาต้น",
       academicYear: "ปีการศึกษา 2569",
+      courseRegistration: "ลงทะเบียนวิชาเรียน",
     },
   }
 })
@@ -40,7 +42,7 @@ const { t } = useI18n({
   </div>
   <p class="mt-2 text-text-muted text-sm">{{ t('semester') }} / {{ t('academicYear') }}</p>
   <div class="bg-surface flex justify-center w-fit mx-auto border border-separator rounded-lg shadow-md my-2">
-    <h3 class="py-2 px-3 font-chulalongkorn font-bold text-text">Course Registration</h3>
+    <h3 class="py-2 px-3 font-chulalongkorn font-bold text-text">{{ t('courseRegistration') }}</h3>
   </div>
   <CourseRegistration />
 </div>
