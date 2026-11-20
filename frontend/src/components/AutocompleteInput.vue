@@ -30,7 +30,10 @@ const sortedOptions = computed<Type[]>(() => {
     });
 });
 
-watch(inputValue, ()=>{selectedIndex.value = 0})
+watch(inputValue, ()=>{
+    selectedIndex.value = 0;
+    scrollOptionIntoView();
+})
 
 
 function onFocus(){
