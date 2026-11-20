@@ -10,7 +10,7 @@ const { t } = useI18n({
   messages: {
     en: {
       announcementsLabel: "Announcements",
-      date: "27 Setempber 2026",
+      date: "27 Septempber 2026",
     },
     th: {
       announcementsLabel: "ประกาศ",

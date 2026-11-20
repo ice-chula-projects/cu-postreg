@@ -67,6 +67,12 @@ function scrollOptionIntoView(){
     const selected = optionsUlElement.value?.children[selectedIndex.value];
     selected?.scrollIntoView({behavior: 'instant', block:"nearest" })
 }
+watch(
+    () => props.initialValue,
+    (value) => {
+        inputValue.value = value ?? "";
+    }
+);
 
 </script>
 
