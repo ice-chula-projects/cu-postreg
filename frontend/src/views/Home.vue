@@ -9,10 +9,12 @@ const { t } = useI18n({
   useScope: 'local',
   messages: {
     en: {
-      announcementsLabel: "Announcements"
+      announcementsLabel: "Announcements",
+      date: "27 Setempber 2026",
     },
     th: {
-      announcementsLabel: "ประกาศ"
+      announcementsLabel: "ประกาศ",
+      date: "27 กันยายน 2569",
     },
   },
 })
@@ -32,7 +34,7 @@ const { t } = useI18n({
         <h1 class="font-bold font-chulalongkorn text-4xl mt-auto">{{ t("announcementsLabel") }}</h1>
       </div>
       <div class="border-separator bg-surface/40 rounded-2xl border-2 w-160 h-100 p-2 overflow-scroll">
-      <h3 class="font-bold">27 Sep 2026</h3>
+      <h3 class="font-bold">{{ t('date') }}</h3>
       <p>
         Announcement !! During 27–29 September 2026 <br>
 For 2304193 Physics Lab for Eng <br>
