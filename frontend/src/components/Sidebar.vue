@@ -67,6 +67,7 @@ const { t } = useI18n({
       registration: "Registration",
       registerForCourses: "Register For Courses",
       dropCourses: "Drop Courses",
+      name: "Mr. FIRSTNAME LASTNAME",
     },
     th: {
       home: "หน้าแรก",
@@ -74,6 +75,7 @@ const { t } = useI18n({
       registration: "การลงทะเบียน",
       registerForCourses: "ลงทะเบียนปกติ",
       dropCourses: "ลดวิชาเรียน",
+      name: "นายชื่อจริง นามสกุล",
     },
   }
 })
@@ -116,7 +118,7 @@ const { t } = useI18n({
       <img src="/images/User Icon.png" class="h-full">
       <div class="flex flex-col m-auto">
         <p class="font-bold text-sm">{{state.id}}</p>
-        <p class="text-xs">Mr. FIRSTNAME LASTNAME</p>
+        <p class="text-xs">{{ t('name') }}</p>
       </div>
     </div>
   </div>

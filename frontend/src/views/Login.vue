@@ -28,16 +28,16 @@ const { t } = useI18n({
       }
     },
     th: {
-      studentIdFormLabel: "REPLACE ME",
-      studentIdFormPlaceholder: "REPLACE ME",
-      passwordFormLabel: "REPLACE ME",
-      passwordFormPlaceholder: "REPLACE ME",
-      loginButtonText: "REPLACE ME",
-      forgotPasswordText: "REPLACE ME",
+      studentIdFormLabel: "รหัสนิสิต",
+      studentIdFormPlaceholder: "กรอกรหัสนิสิต...",
+      passwordFormLabel: "รหัสผ่าน",
+      passwordFormPlaceholder: "กรอกรหัสผ่าน...",
+      loginButtonText: "เข้าสู่ระบบ",
+      forgotPasswordText: "ลืมรหัสผ่าน?",
       errorText:{
-        [ErrorTextId.studentIdContainsNonNumeric]: "REPLACE ME",
-        [ErrorTextId.studentIdMustBe10Long]: "REPLACE ME",
-        [ErrorTextId.passwordMustBeEntered]: "REPLACE ME"
+        [ErrorTextId.studentIdContainsNonNumeric]: "รหัสนิสิตต้องมีเฉพาะตัวเลข",
+        [ErrorTextId.studentIdMustBe10Long]: "รหัสนิสิตต้องมี 10 หลัก",
+        [ErrorTextId.passwordMustBeEntered]: "รหัสผ่านต้องกรอก"
       }
     },
   }
@@ -82,7 +82,7 @@ function validateForm(): boolean{
   if(formData.password.length <= 0){
     passwordErrorTextId.value = ErrorTextId.passwordMustBeEntered;
   }
-  
+
   isStudentIdError.value = studentIdErrorTextId.value != null;
   isPasswordError.value = passwordErrorTextId.value != null;
 
@@ -135,13 +135,13 @@ function login(){
         />
       <p class="text-red-600 text-xs" v-if="isPasswordError">{{ t("errorText." + passwordErrorTextId) }}</p>
     </div>
-    
+
     <a class="text-blue-500 underline" href="#" @click="onForgetPassword"> {{t('forgotPasswordText')}} </a>
     <!-- fake captcha -->
      <div class="border-2 border-gray-200 rounded-md w-50 h-15 flex items-center p-2 bg-[#f9f9f9]" :class="{'border-red-300': isCaptchaError}">
       <input type="checkbox" v-model="formData.captcha"></input>
       <p class="ml-2 text-[12px]">I'm not a robot</p>
-      <img src="/images/reCaptcha Logo.png" class="h-full ml-auto"></img>
+      <img src="/images/reCAPTCHA.svg" class="h-full ml-auto"></img>
      </div>
     <Button type="submit">{{ t('loginButtonText') }}</Button>
   </form>
