@@ -73,18 +73,21 @@ function makeRow({ isSaved = false, courseId = '', courseName = null, section = 
   })
 }
 
-const rows = computed<Row[]>(() => state.value.coursesRegistered)
+const rows = ref<Row[]>(state.value.coursesRegistered.map(row => ({ ...row })))
 
 function addRow() {
   rows.value.push(makeRow())
 }
 
-function toggleCancel(row: Row) {
-  if (row.isSaved) { // Saved courses can't be deleted and its cancel needs confirmation
-    row.cancelled = !row.cancelled
+function toggleCancel(row: Row, checked: boolean) {
+  if (row.isSaved) {
+    row.cancelled = checked
     return
   }
-  state.value.coursesRegistered = rows.value.filter((r) => r.id !== row.id)
+
+  if (checked) {
+    rows.value = rows.value.filter(r => r.id !== row.id)
+  }
 }
 
 function sectionLabel(row: Row) {
@@ -101,13 +104,16 @@ function entryStatus(row: Row) {
 }
 
 function handleSubmit() {
-  console.log('submitting', rows.value)
-  state.value.coursesRegistered = rows.value.map((row) => {
-    return {
+  const committedRows = rows.value
+    .filter(row => !row.cancelled)
+    .map(row => ({
       ...row,
-      isSaved: true
-    }
-  }).filter((r) => !r.cancelled)
+      isSaved: true,
+      cancelled: false,
+    }))
+
+  state.value.coursesRegistered = committedRows
+  rows.value = committedRows.map(row => ({ ...row }))
 }
 
 function validateRows(rows: Row[]): { valid: true } | { valid: false; reason: string } {
@@ -171,7 +177,7 @@ function openConfirmation() {
           <AutocompleteInput
             :options="courses"
             :similarity-score-function="computeIdSimilarityScore"
-            :rendering-function="(x) => { console.log(courses);  return h('p', {}, (x as Course).id + ' ' + (x as Course).name) }"
+            :rendering-function="(x) => h('p', {}, (x as Course).id + ' ' + (x as Course).name)"
             :selected-value-function="(x) => (x as Course).id"
             :initial-value="row.courseId"
             @select="(course) => {
@@ -185,8 +191,22 @@ function openConfirmation() {
           />
         </div>
 
-        <div class="truncate px-4">
-          {{ row.courseName ?? "-" }}
+        <div class="px-4">
+          <AutocompleteInput
+            :options="courses"
+            :similarity-score-function="computeIdSimilarityScore"
+            :rendering-function="(x) => h('p', {}, (x as Course).id + ' ' + (x as Course).name)"
+            :selected-value-function="(x) => (x as Course).name"
+            :initial-value="row.courseName"
+            @select="(course) => {
+              row.courseId = course.id;
+              row.courseName = course.name;
+              row.credits = course.credits;
+            }"
+            :disabled="row.isSaved"
+            aria-label="Course ID"
+            class="rounded-md border border-separator bg-surface disabled:bg-surface-alt disabled:text-text-disabled"
+          />
         </div>
 
         <div class="flex items-center gap-2 px-4">
@@ -229,7 +249,7 @@ function openConfirmation() {
             :checked="row.cancelled"
             aria-label="Cancel this course"
             class="h-5 w-5 rounded border-slate-500"
-            @change="toggleCancel(row)"
+            @change="toggleCancel(row, ($event.target as HTMLInputElement).checked)"
           />
         </div>
       </div>
@@ -240,7 +260,7 @@ function openConfirmation() {
         <Button variant="subtle" @click="addRow">
           {{ t('addRow') }}
         </Button>
-      
+
         <Button @click="openConfirmation">
           {{ t('confirmEntries') }}
         </Button>
@@ -251,11 +271,11 @@ function openConfirmation() {
       <h2 class="mb-4 text-center text-xl font-bold font-chulalongkorn text-primary">
         {{ t('confirmCourses') }}
       </h2>
-    
+
       <p v-if="rows.length === 0" class="text-slate-500">
         {{ t('noCoursesAdded') }}
       </p>
-    
+
       <ul v-else class="mb-5 space-y-2">
         <li
           v-for="(row, index) in rows"
@@ -270,7 +290,7 @@ function openConfirmation() {
               ({{ sectionLabel(row) }}, {{ getCourseFromId(row.courseId)?.credits }} {{ t('credits') }})
             </span>
           </div>
-    
+
           <span
             class="shrink-0 rounded-full px-2 py-1 text-xs font-bold"
             :class="{
@@ -283,7 +303,7 @@ function openConfirmation() {
           </span>
         </li>
       </ul>
-    
+
       <!-- Validation error -->
       <div
         v-if="showValidationError && !validation.valid"
@@ -292,12 +312,12 @@ function openConfirmation() {
       >
         {{ t(validation.reason) }}
       </div>
-    
+
       <div class="flex justify-between gap-3">
         <Button @click="confirmEntries">
           {{ t('confirm') }}
         </Button>
-    
+
         <Button
           type="button"
           variant="ghost"
