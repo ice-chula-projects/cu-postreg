@@ -148,6 +148,10 @@ function openConfirmation() {
   showValidationError.value = false
   document.getElementById('confirm-popover')?.showPopover()
 }
+
+const validCourses = computed<Course[]>(() => courses.filter((x) => !rows.value.map(y => y.courseId).includes(x.id)))
+console.log(validCourses.value)
+console.log(rows.value.map(y => y.id))
 </script>
 
 <template>
@@ -172,7 +176,7 @@ function openConfirmation() {
 
         <div class="px-4">
           <AutocompleteInput
-            :options="courses"
+            :options="validCourses"
             :similarity-score-function="computeIdSimilarityScore"
             :rendering-function="(x) => h('p', {}, (x as Course).id + ' ' + (x as Course).name)"
             :selected-value-function="(x) => (x as Course).id"
@@ -190,7 +194,7 @@ function openConfirmation() {
 
         <div class="px-4">
           <AutocompleteInput
-            :options="courses"
+            :options="validCourses"
             :similarity-score-function="computeNameSimilarityScore"
             :rendering-function="(x) => h('p', {}, (x as Course).id + ' ' + (x as Course).name)"
             :selected-value-function="(x) => (x as Course).name"
