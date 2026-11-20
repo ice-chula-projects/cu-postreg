@@ -23,7 +23,7 @@ export const courses: Course[] = [
   { id: "2304194", name: "PHYS ELEC LAB ENGS", credits: 1, keywords: ["General", "Physics", "Electronics", "Laboratory", "Engineers"], tags: []},
   { id: "5501123", name: "COMM ENG II", credits: 3, keywords: ["Communicative", "English"], tags: []},
   // Year 2, First Semester
-  { id: "2182202", name: "ADV MATH METH", credits: 3, keywords: ["Advanced", "Mathematics", "Methods", "Calculus", "Complex"], tags: ["Charnchai"]},
+  { id: "2182202", name: "ADV MATH METH", credits: 3, keywords: ["Advanced", "Mathematics", "Methods", "Calculus"], tags: ["Charnchai"]},
   { id: "2182212", name: "CIR DIG ELEC LAB", credits: 1, keywords: ["Electrical", "Circuit", "Digital", "Electronics", "Laboratory"], tags: []},
   { id: "2182214", name: "ELEC CIR ICE", credits: 3, keywords: ["Electrical", "Circuit"], tags: []},
   { id: "2190200", name: "DISCRETE STRUC", credits: 3, keywords: ["Structures", "Math", "Mathematics"], tags: []},
