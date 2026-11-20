@@ -31,7 +31,10 @@ export function computeLevenshteinDistance(stringA: string, stringB: string): nu
 
 export function computeIdSimilarityScore(inputIdString: string, course: Course): number{
     //negative since a lower distance is better, now a distance of 1 will score better than a distance of 3 since (-1 > -3)
-    return -computeLevenshteinDistance(inputIdString, course.id);
+    let score = -computeLevenshteinDistance(inputIdString, course.id);
+    score += computeTagScore(inputIdString, course.tags);
+    
+    return score;
 }
 
 export function computeNameSimilarityScore(inputNameString: string, course: Course): number{
@@ -72,6 +75,20 @@ export function computeNameSimilarityScore(inputNameString: string, course: Cour
 
     //negative since a lower score is better
     score = -Math.min(matchScore, keywordScore) + exactKeywordMatches;
-    
+
+    score += computeTagScore(inputNameString, course.tags);
+    return score;
+}
+
+//if a tag is present, add a large offset so courses containing that tag will be on top;
+function computeTagScore(inputString: string, tags: string[]){
+    inputString = inputString.toLowerCase().trim();
+    tags = tags.map(x=>x.toLowerCase().trim());
+
+    let score = 0;
+    for(const word of inputString.match(/#\w+/gi) ?? []){
+        if(tags.includes(word.slice(1).toString())) score += 1000;
+    }
+
     return score;
 }
