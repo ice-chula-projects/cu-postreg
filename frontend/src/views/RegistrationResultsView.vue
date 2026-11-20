@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Button from '@/components/Button.vue';
-import { courses } from '@/ts/courses';
+import { courses, getCourseFromId } from '@/ts/courses';
 import { state } from '@/ts/GlobalState';
 import { useI18n } from 'vue-i18n';
 
@@ -89,7 +89,7 @@ const { t } = useI18n({
           </td>
   
           <td class="border border-separator px-4 py-3">
-            {{ courses[row.courseId]?.name }}
+            {{ getCourseFromId(row.courseId)?.name }}
           </td>
   
           <td class="border border-separator px-4 py-3">
@@ -99,7 +99,7 @@ const { t } = useI18n({
           </td>
   
           <td class="border border-separator px-4 py-3">
-            {{ courses[row.courseId]?.credits?.toFixed(1) }}
+            {{ getCourseFromId(row.courseId)?.credits?.toFixed(1) }}
           </td>
   
           <td class="border border-separator px-4 py-2 text-center">
@@ -114,7 +114,7 @@ const { t } = useI18n({
     </table>
     <div class="flex text-sm flex-wrap items-center justify-between gap-3 bg-primary-subtle px-4 py-2">
       <h2 class="text-primary font-semibold">
-        {{ t('totalCredits') }}: {{ state.coursesRegistered.map((row) => courses[row.courseId]?.credits).reduce((sum, value) => (sum ?? 0) + (value ?? 0), 0)?.toFixed(1) }}
+        {{ t('totalCredits') }}: {{ state.coursesRegistered.map((row) => getCourseFromId(row.courseId)?.credits).reduce((sum, value) => (sum ?? 0) + (value ?? 0), 0)?.toFixed(1) }}
       </h2>
     </div>
   </div>
