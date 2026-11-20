@@ -3,7 +3,9 @@ import { computed, nextTick, ref, watch, type VNodeChild, type VNodeRef } from '
 
 const props = defineProps<{
     options: Type[];
-    sortingFunction: (input:string, a:Type, b: Type) => number;
+    //function that gives a numeric value for how similiar the text input is to this option
+    //autocomplete will be sorted descending according to this function
+    similarityScoreFunction: (textInput:string, a:Type) => number;
     renderingFunction: (x:Type) => VNodeChild;
     //what to display in the input box when an option is selected
     selectedValueFunction: (x:Type) => string;
@@ -21,7 +23,7 @@ const selectedIndex = ref(0);
 
 const sortedOptions = computed<Type[]>(() => {
     return [...props.options].sort((a, b)=>{
-        return props.sortingFunction(input.value, a, b);
+        return props.similarityScoreFunction(input.value, b) - props.similarityScoreFunction(input.value, a);
     });
 });
 

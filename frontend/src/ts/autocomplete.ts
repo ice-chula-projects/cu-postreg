@@ -1,3 +1,5 @@
+import type { Course } from "./courses";
+
 //https://medium.com/@ethannam/understanding-the-levenshtein-distance-equation-for-beginners-c4285a5604f0
 export function computeLevenshteinDistance(stringA: string, stringB: string): number{
     stringA = stringA.trim();
@@ -25,4 +27,9 @@ export function computeLevenshteinDistance(stringA: string, stringB: string): nu
         }
     }
     return levenshteinMatrix[length]![length]!;
+}
+
+export function computeIdSimilarityScore(inputIdString: string, course: Course){
+    //negative since a lower distance is better, now a distance of 1 will score better than a distance of 3 since (-1 > -3)
+    return -computeLevenshteinDistance(inputIdString, course.id);
 }
