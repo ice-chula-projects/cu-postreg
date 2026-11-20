@@ -16,18 +16,21 @@ const emit = defineEmits<{
 }>()
 
 const isFocused = ref(false);
-const input = ref("");
+const inputValue = ref("");
 const inputElement = ref<HTMLInputElement | null>(null);
 const optionsUlElement = ref<HTMLUListElement | null>(null);
 const selectedIndex = ref(0);
 
+defineExpose({inputValue, inputElement});
+
 const sortedOptions = computed<Type[]>(() => {
     return [...props.options].sort((a, b)=>{
-        return props.similarityScoreFunction(input.value, b) - props.similarityScoreFunction(input.value, a);
+        return props.similarityScoreFunction(inputValue.value, b) - props.similarityScoreFunction(inputValue.value, a);
     });
 });
 
-watch(input, ()=>{selectedIndex.value = 0})
+watch(inputValue, ()=>{selectedIndex.value = 0})
+
 
 function onFocus(){
     isFocused.value = true;
@@ -40,7 +43,7 @@ function onUnfocus(){
 
 function onOptionSelect(index: number){
     const selectedOption = sortedOptions.value[index]!;
-    input.value = props.selectedValueFunction(selectedOption);
+    inputValue.value = props.selectedValueFunction(selectedOption);
     emit("select", selectedOption)
 
     inputElement.value?.blur();
@@ -74,7 +77,7 @@ function scrollOptionIntoView(){
             ref="inputElement"
             type="text"
             autocomplete="off"
-            v-model="input"
+            v-model="inputValue"
         />
         <div v-if="isFocused" class="absolute bg-white h-20 overflow-scroll w-full scrollbar-thin bor">
             <ul ref="optionsUlElement">
