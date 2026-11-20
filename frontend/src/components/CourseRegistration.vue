@@ -6,7 +6,7 @@ import type { Row } from '@/ts/CourseRegistration'
 import { state } from '@/ts/GlobalState.ts';
 import { useI18n } from 'vue-i18n';
 import AutocompleteInput from './AutocompleteInput.vue';
-import { computeIdSimilarityScore } from '@/ts/autocomplete';
+import { computeIdSimilarityScore, computeNameSimilarityScore } from '@/ts/autocomplete';
 
 const { t } = useI18n({
   useScope: "local",
@@ -53,10 +53,7 @@ const { t } = useI18n({
     }
   }
 })
-let nextId = 0
-const createId = () => `row-${nextId++}`
-
-
+const createId = () => `row-${crypto.randomUUID()}`
 
 function makeRow({ isSaved = false, courseId = '', courseName = null, section = null, sectionModifier = 'only', sectionSecondary = null, credits = null, canceled = false } = {}): Reactive<Row> {
   return reactive({
@@ -194,7 +191,7 @@ function openConfirmation() {
         <div class="px-4">
           <AutocompleteInput
             :options="courses"
-            :similarity-score-function="computeIdSimilarityScore"
+            :similarity-score-function="computeNameSimilarityScore"
             :rendering-function="(x) => h('p', {}, (x as Course).id + ' ' + (x as Course).name)"
             :selected-value-function="(x) => (x as Course).name"
             :initial-value="row.courseName"
