@@ -39,6 +39,11 @@ export function computeNameSimilarityScore(inputNameString: string, course: Cour
     const courseName = course.name.toLowerCase().trim();
     const keywords = course.keywords.map(x=>x.toLowerCase().trim());
 
+    //special case for perfect match
+    if(inputNameString.replaceAll(/[\s\p{P}]/giu, "") == courseName.replaceAll(/[\s\p{P}]/giu, "")){
+        return Infinity;
+    }
+
     let score = 0
 
     //loop through all words of input and courseName and use the best score found
