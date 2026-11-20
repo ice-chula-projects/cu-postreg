@@ -82,7 +82,7 @@ function scrollOptionIntoView(){
             v-model="inputValue"
             class="py-2 pl-1"
         />
-        <div v-if="isFocused" class="absolute bg-white h-20 overflow-scroll w-full scrollbar-thin z-50">
+        <div v-if="isFocused" class="absolute bg-surface h-25 overflow-scroll w-full scrollbar-thin z-50 border rounded-sm border-separator">
             <ul ref="optionsUlElement">
                 <li
                     v-for="(option, index) in sortedOptions"
@@ -90,7 +90,7 @@ function scrollOptionIntoView(){
                     @pointerdown.prevent
                     @click="onOptionSelect(index)"
                     @mouseenter="selectedIndex = index"
-                ><component :is="renderingFunction(option)"></component></li>
+                ><component :is="renderingFunction(option)" class="p-1"></component></li>
             </ul>
         </div>
     </div>
