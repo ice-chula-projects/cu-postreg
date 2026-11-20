@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import AutocompleteInput from '@/components/AutocompleteInput.vue';
+import { computeLevenshteinDistance } from '@/ts/autocomplete';
+import { courses } from '@/ts/courses';
+import { h } from 'vue';
 import { useI18n } from 'vue-i18n'
-import LanguageToggle from '@/components/LanguageToggle.vue';
-import Button from '@/components/Button.vue';
 
 const { t } = useI18n({
   useScope: 'local',
@@ -24,7 +26,6 @@ const { t } = useI18n({
     />
     <h1 class="font-chulalongkorn text-primary font-bold text-2xl">{{ t('officeOfTheRegistrar') }}</h1>
     <p class="font-chulalongkorn text-xl text-text ">{{ t('chulalongkornUniversity') }}</p>
-
     <div>
       <div class="self-start flex">
         <img src="/images/announcement.jpg" class="w-20 mt-auto">

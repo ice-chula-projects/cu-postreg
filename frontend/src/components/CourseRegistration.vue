@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, reactive, type Reactive, computed } from 'vue'
 import Button from './Button.vue'
-import { courses } from '@/ts/courses'
+import { courses, getCourseFromId } from '@/ts/courses'
 import type { Row } from '@/ts/CourseRegistration'
 import { state } from '@/ts/GlobalState.ts';
 import { useI18n } from 'vue-i18n';
@@ -54,10 +54,7 @@ const { t } = useI18n({
 let nextId = 0
 const createId = () => `row-${nextId++}`
 
-function lookupCourse(courseId: string) {
-  const key = courseId?.trim().toUpperCase()
-  return courses[key] ?? { name: '-', credits: '-' }
-}
+
 
 function makeRow({ isSaved = false, courseId = '', section = null, sectionModifier = 'only', sectionSecondary = null, canceled = false } = {}): Reactive<Row> {
   return reactive({
@@ -111,7 +108,7 @@ function handleSubmit() {
 
 function validateRows(rows: Row[]): { valid: true } | { valid: false; reason: string } {
   for (const row of rows) {
-    if (lookupCourse(row.courseId).name === '-') {
+    if (getCourseFromId(row.courseId) == null) {
       return { valid: false, reason: "courseNotFound"}
     }
     if (row.section === null) {
@@ -177,7 +174,7 @@ function openConfirmation() {
         </div>
 
         <div class="truncate px-4">
-          {{ lookupCourse(row.courseId).name }}
+          {{ getCourseFromId(row.courseId)?.name }}
         </div>
 
         <div class="flex items-center gap-2 px-4">
@@ -211,7 +208,7 @@ function openConfirmation() {
         </div>
 
         <div class="px-4 text-slate-700">
-          {{ lookupCourse(row.courseId).credits }}
+          {{ getCourseFromId(row.courseId)?.credits }}
         </div>
 
         <div class="flex justify-center px-4">
@@ -256,9 +253,9 @@ function openConfirmation() {
           <div class="text-sm">
             <span class="font-bold">{{ index + 1 }}.</span>
             {{ row.courseId || t('noIdSet') }}
-            <strong>{{ lookupCourse(row.courseId).name }}</strong>
+            <strong>{{ getCourseFromId(row.courseId)?.name }}</strong>
             <span class="text-text-muted">
-              ({{ sectionLabel(row) }}, {{ lookupCourse(row.courseId).credits }} {{ t('credits') }})
+              ({{ sectionLabel(row) }}, {{ getCourseFromId(row.courseId)?.credits }} {{ t('credits') }})
             </span>
           </div>
     

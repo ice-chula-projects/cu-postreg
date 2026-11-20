@@ -3,7 +3,7 @@ import { useI18n } from 'vue-i18n';
 import Button from './Button.vue';
 import LanguageToggle from './LanguageToggle.vue';
 import LogoContainer from './LogoContainer.vue';
-import { defaultState, resetGlobalStateToDefault, state } from '@/ts/GlobalState.ts';
+import { defaultState, state } from '@/ts/GlobalState.ts';
 import router from '@/router/index.ts';
 
 const { t } = useI18n({

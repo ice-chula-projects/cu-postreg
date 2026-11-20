@@ -5,6 +5,7 @@ import { RouterView } from 'vue-router';
 import { state } from './ts/GlobalState.ts';
 import { watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { computeLevenshteinDistance } from './ts/autocomplete.ts';
 
 const storedState = sessionStorage.getItem("state");
 if(storedState != null) state.value = JSON.parse(storedState);
